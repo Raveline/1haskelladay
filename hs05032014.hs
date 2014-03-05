@@ -1,6 +1,7 @@
 import Data.Monoid
+import Data.Foldable
 chainEndos :: [a->a] -> a -> a
-chainEndos xs = appEndo (mconcat (map Endo xs))
+chainEndos = appEndo . foldMap Endo 
 
 main = print $ chainEndos [('h':),('e':)] "llo"
 
