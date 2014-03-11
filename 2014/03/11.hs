@@ -1,5 +1,4 @@
 import Data.Char
-import Control.Applicative
 
 lcAlphabetFrom :: Char -> [Char]
 lcAlphabetFrom c = fst sep ++ take (length $ snd sep) ['a'..'z']
