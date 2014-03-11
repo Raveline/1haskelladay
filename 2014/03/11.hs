@@ -1,20 +1,10 @@
 import Data.Char
+import Control.Applicative
 
 lcAlphabetFrom :: Char -> [Char]
-lcAlphabetFrom c = let offset = toAlphPos (keepInLower c) in
-                    map (toAlph . (flip mod 26) . (+ offset) . toAlphPos) ['a'..'z']
-
-toAlphPos :: Char -> Int
-toAlphPos = flip (-) (ord 'a') . ord
-
-toAlph :: Int -> Char
-toAlph = chr . (+ ord 'a') 
-
-keepInLower :: Char -> Char
-keepInLower c 
-    | c `elem` ['a'..'z'] = c
-    | otherwise = 'a'
-
+lcAlphabetFrom c = fst sep ++ take (length $ snd sep) ['a'..'z']
+    where 
+        sep = span (isLower) (take 26 [c..])
 
 main = do
     print $ lcAlphabetFrom 'a' -- "abcdefghijklmnopqrstuvwxyz"
